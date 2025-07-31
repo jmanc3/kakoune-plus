@@ -1,0 +1,116 @@
+eval %sh{kak-lsp}
+lsp-enable
+
+source "~/.config/kak/plugins/fzf.kak/rc/fzf.kak" # loading base fzf module
+evaluate-commands %sh{
+    find -L "~/.config/kak/plugins/fzf.kak/rc/modules/" -type f -name '*.kak' -exec printf 'source "%s"\n' {} \;
+}
+
+
+map global normal <c-o> ': fzf-mode<ret>'
+
+
+# addhl global/ wrap
+
+#colorscheme gruvbox-dark
+colorscheme colibri
+
+# set tab width, set indent with sapces
+set-option global tabstop 4
+set-option global indentwidth 4
+
+# always keep one line on screen
+set-option global scrolloff 3,5
+
+# highlight trailing spaces
+#add-highlighter global/ regex \h+$ 0:Error
+
+# wrap long lines
+#add-highlighter global/ wrap -word -indent
+
+# Display line numbers
+add-highlighter global/ number-lines -hlcursor
+
+# Clipboard management mappings
+map -docstring "yank the selection into the clipboard" global user y "<a-|> xsel --input --clipboard <ret>"
+map -docstring "paste the clipboard" global user p "<a-!> xsel<ret>"
+
+# Every time there's a yank, it copies to the clipboard so that it's in sync
+hook global RegisterModified '"' %{ nop %sh{
+    printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
+}}
+
+hook global InsertChar j %{ try %{
+    exec -draft hH <a-k>jj<ret> d
+    exec <esc>
+    exec :wq!<ret>
+}}
+
+map global normal <a-c> ': comment-line<ret>'
+
+# ctrl+p for method parameters
+map global normal <a-p> ':lsp-signature-help<ret>'
+map global insert <a-p> '<esc>:lsp-signature-help<ret>i'
+
+# hover help on errors and stuff
+map global normal <a-ret> ':lsp-hover<ret>'
+
+
+#Split tmux pane in a given direction and start kak in the same session
+define-command tmux-split -params 1 -docstring 'Split tmux pane (direction: -h/-v/left/up/right/down)' %{
+  evaluate-commands %sh{
+    case "$1" in
+      -h)
+        tmux split-window -h "kak -c $kak_session"
+        ;;
+      -v)
+        tmux split-window -v "kak -c $kak_session"
+        ;;
+      right)
+        # simulate left: split right, move current pane to the right of new
+        tmux split-window -h "kak -c $kak_session"
+        ;;
+      down)
+        # simulate up: split below, move current pane to bottom of new
+        tmux split-window -v "kak -c $kak_session"
+        ;;
+      left)
+        tmux split-window -h "kak -c $kak_session"
+        tmux last-pane
+        ;;
+      up)
+        tmux split-window -v "kak -c $kak_session"
+        tmux last-pane
+        ;;
+    esac
+  }
+}
+
+declare-user-mode panels
+map global normal <c-p> ': enter-user-mode panels<ret>'
+
+map global panels h ': tmux-split left<ret>'  -docstring 'tmux split left'
+map global panels k ': tmux-split up<ret>'    -docstring 'tmux split above'
+map global panels l ': tmux-split right<ret>' -docstring 'tmux split right'
+map global panels j ': tmux-split down<ret>'  -docstring 'tmux split below'
+map global panels p ': quit!<ret>'            -docstring 'close panel'
+
+define-command tmux-next-pane %{
+    evaluate-commands -draft %sh{
+        # Send Ctrl+b
+        xdotool key --clearmodifiers ctrl+b
+        # Small delay so tmux catches prefix
+        sleep 0.05
+        # Send 'o' to switch to next pane
+        xdotool key --clearmodifiers o
+        xdotool key
+    }
+}
+
+map global normal , ': tmux-next-pane<ret>'
+
+
+hook global InsertChar k %{ try %{
+  exec -draft hH <a-k>jk<ret> d
+  exec <esc>
+}}
