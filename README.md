@@ -20,9 +20,13 @@ xsel, so that copy and pasting from buffer in X11 works
 
 Ctrl+p - to open up panels menu that allows you to open a split view
 
+![multilpe panes](/screenshots/panes.png)
+
 , - to cycle between open panels
 
 Ctrl+o - to open up fzf menu that has many useful shortcuts
+
+![fuzzy finding file](/screenshots/fuzzy_finding.png)
 
 Alt+c - toggle comment lines cursor is on
 
