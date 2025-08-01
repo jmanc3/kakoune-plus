@@ -1,4 +1,4 @@
-# Kakoune Plus
+# Kakoune Plus Helix
 
 An actually good kakoune config
 
@@ -11,8 +11,6 @@ xdotool, for sending escape key to kakoune to get rid of annoying changelog on *
 clangd, for c++ inline error messages (look up which languague server you need for your lang [kak-lsp](https://github.com/kakoune-lsp/kakoune-lsp?tab=readme-ov-file#install-language-servers-for-your-desired-languages))
 
 fzf, to open files with a fuzzy finder
-
-grep, to check if kak alias already exists in bashrc
 
 xsel, so that copy and pasting from buffer in X11 works
 
