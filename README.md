@@ -12,6 +12,10 @@ clangd, for c++ inline error messages (look up which languague server you need f
 
 fzf, to open files with a fuzzy finder
 
+highlight, so that code preview of fzf is syntax highlighted
+
+grep, to check if kak alias already exists in bashrc
+
 xsel, so that copy and pasting from buffer in X11 works
 
 ## Explanation
