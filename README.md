@@ -1,6 +1,6 @@
 # Kakoune Plus Helix
 
-An actually good kakoune config
+An actually good kakoune config that takes inspiration from Helix 
 
 ## Requirements
 
