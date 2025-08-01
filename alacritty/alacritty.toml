@@ -1,0 +1,21 @@
+[general]
+import = [
+    #"~/.config/alacritty/themes/themes/flexoki.toml.toml"
+    "~/.config/alacritty/themes/themes/colibri.toml"
+]
+
+[window]
+opacity = 1.0
+
+[window.dimensions]
+columns = 140
+lines = 36
+
+[font]
+normal = { family = "Cascadia Mono", style = "Regular" }
+size = 13
+
+
+
+
+

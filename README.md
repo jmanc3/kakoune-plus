@@ -57,6 +57,9 @@ cp -r kak-lsp ~/.config/
 # copy over tmux config and set it as config source
 cp -r tmux ~/.config/
 tmux source-file ~/.config/tmux/tmux.conf
+
+# copy over alacritty terminal theme
+cp -r alacritty ~/.config/
 ```
 
 And then add this to your `~/.bashrc`
@@ -67,6 +70,12 @@ function kakoune() {
     tmux new-session -s "$session_name" bash -c "kak \"$@\""
 }
 alias kak='kakoune'
+
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:#a4a0e8,bg:#3b224c,hl:#dbbfef
+  --color=fg+:#ffffff,bg+:#452859,hl+:#a4a0e8
+  --color=info:#E8DCA0,prompt:#EFBA5D,pointer:#9FF28F
+  --color=marker:#EFBA5D,spinner:#dbbfef,header:#697C81'
 ```
 
 So that when you run `kak`, it'll start it inside a tmux session, so that split pane functionality is available. (The tmux session ends when the kak session ends)
