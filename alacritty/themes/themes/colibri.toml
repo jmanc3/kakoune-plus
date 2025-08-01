@@ -1,0 +1,56 @@
+# Colibri Theme (Dark) for Alacritty
+
+[colors.primary]
+background = "#3b224c"  # colibri.midnight
+foreground = "#a4a0e8"  # colibri.lavender
+
+dim_foreground = "#5a5977"     # colibri.comet (dim text)
+bright_foreground = "#ffffff"  # white
+
+[colors.normal]
+black   = "#281733"  # colibri.revolver (darkest)
+red     = "#f47868"  # colibri.error
+green   = "#9FF28F"  # colibri.mint
+yellow  = "#ECCDBA"  # colibri.almond
+blue    = "#6F44F0"  # colibri.diff_change
+magenta = "#dbbfef"  # colibri.lilac
+cyan    = "#2CF2F1"  # colibri.neon
+white   = "#ffffff"  # colibri.white
+
+[colors.bright]
+black   = "#5a5977"  # colibri.comet
+red     = "#F22C86"  # colibri.diff_red
+green   = "#35BF86"  # colibri.diff_green
+yellow  = "#EFBA5D"  # colibri.honey
+blue    = "#3B0FBF"  # colibri.dblue
+magenta = "#a4a0e8"  # colibri.lavender
+cyan    = "#7FB998"  # colibri.sinbad
+white   = "#f3f2fc"  # colibri.white_lilac
+
+[colors.dim]
+black   = "#452859"  # colibri.bossanova
+red     = "#802F00"  # colibri.cedar
+green   = "#7FB998"  # colibri.sinbad
+yellow  = "#E8DCA0"  # colibri.chamois
+blue    = "#69A0F3"  # older colibri.diff_change
+magenta = "#938fdb"  # alt lavender
+cyan    = "#697C81"  # colibri.sirocco
+white   = "#CCCCCC"  # colibri.silver
+
+[colors.cursor]
+text = "#3b224c"
+cursor = "#ffffff"
+
+[colors.selection]
+text = "#ffffff"
+background = "#802F00"  # cedar highlight
+
+[colors.search]
+matches.background = "#ffcd1c"  # colibri.warning
+matches.foreground = "#3b224c"
+focused_match.background = "#EFBA5D"
+focused_match.foreground = "#3b224c"
+
+[colors.footer_bar]
+background = "#452859"
+foreground = "#ffffff"
