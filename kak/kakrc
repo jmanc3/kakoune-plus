@@ -1,9 +1,11 @@
 eval %sh{kak-lsp}
 lsp-enable
 
-source "~/.config/kak/plugins/fzf.kak/rc/fzf.kak" # loading base fzf module
+source %sh{ echo "$HOME/.config/kak/plugins/fzf.kak/rc/fzf.kak" }
+
+#source "/home/jmanc3/.config/kak/plugins/fzf.kak/rc/fzf.kak" # loading base fzf module
 evaluate-commands %sh{
-    find -L "~/.config/kak/plugins/fzf.kak/rc/modules/" -type f -name '*.kak' -exec printf 'source "%s"\n' {} \;
+    find -L "$HOME/.config/kak/plugins/fzf.kak/rc/modules/" -type f -name '*.kak' -exec printf 'source "%s"\n' {} \;
 }
 
 
@@ -45,6 +47,22 @@ hook global InsertChar j %{ try %{
     exec <esc>
     exec :wq!<ret>
 }}
+
+define-command terminal-start %{
+  evaluate-commands %sh{
+    dir=$(pwd)
+    #cmd="nop %sh{ command "$(cd "$(pwd)"; tmux popup -E -w "100%" -h "50%" -y "40%")" }"
+    cmd="nop %sh{ command "$(cd "$(pwd)"; tmux split-window)" }"
+    #notify-send "${cmd}" "${dir}"
+    #cmd="nop %sh{ command tmux popup -E -w "100%" -h "50%" -y "40%" }"
+    printf "%s\n" "${cmd}"
+  }
+}
+map global user t ':terminal-start<ret>' -docstring 'relu'
+map global normal ` ': terminal-start<ret>'
+
+
+#map global normal <c-o> ':fzf-open-file<ret>'
 
 map global normal <a-c> ': comment-line<ret>'
 
@@ -114,3 +132,6 @@ hook global InsertChar k %{ try %{
   exec -draft hH <a-k>jk<ret> d
   exec <esc>
 }}
+
+map global normal <c-o> ': fzf-mode<ret>'
+
