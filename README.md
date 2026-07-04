@@ -4,6 +4,8 @@ An actually good kakoune config that takes inspiration from Helix
 
 ## Requirements
 
+Jetbrains Mono, for font
+
 tmux, for split panes functionality
 
 ncurses-term, for color tmux
