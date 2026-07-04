@@ -8,9 +8,14 @@ evaluate-commands %sh{
     find -L "$HOME/.config/kak/plugins/fzf.kak/rc/modules/" -type f -name '*.kak' -exec printf 'source "%s"\n' {} \;
 }
 
+source %sh{ echo "$HOME/.config/kak/plugins/kakboard/kakboard.kak" }
+
+hook global WinCreate .* %{
+    kakboard-enable
+}
+
 
 map global normal <c-o> ': fzf-mode<ret>'
-
 
 # addhl global/ wrap
 
@@ -34,13 +39,13 @@ set-option global scrolloff 3,5
 add-highlighter global/ number-lines -hlcursor
 
 # Clipboard management mappings
-map -docstring "yank the selection into the clipboard" global user y "<a-|> xsel --input --clipboard <ret>"
-map -docstring "paste the clipboard" global user p "<a-!> xsel<ret>"
+#map -docstring "yank the selection into the clipboard" global user y "<a-|> xsel --input --clipboard <ret>"
+#map -docstring "paste the clipboard" global user p "<a-!> xsel<ret>"
 
 # Every time there's a yank, it copies to the clipboard so that it's in sync
-hook global RegisterModified '"' %{ nop %sh{
-    printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
-}}
+#hook global RegisterModified '"' %{ nop %sh{
+    #printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
+#}}
 
 hook global InsertChar j %{ try %{
     exec -draft hH <a-k>jj<ret> d
