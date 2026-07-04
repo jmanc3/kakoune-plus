@@ -6,6 +6,10 @@ An actually good kakoune config that takes inspiration from Helix
 
 tmux, for split panes functionality
 
+ncurses-term, for color tmux
+
+kak-lsp, for lsp
+
 xdotool, for sending escape key to kakoune to get rid of annoying changelog on *scratch*
 
 clangd, for c++ inline error messages (look up which languague server you need for your lang [kak-lsp](https://github.com/kakoune-lsp/kakoune-lsp?tab=readme-ov-file#install-language-servers-for-your-desired-languages))
