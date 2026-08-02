@@ -8,6 +8,8 @@ Jetbrains Mono, for font
 
 tmux, for split panes functionality
 
+tinty, for theme colors across alacritty tmux and kak
+
 ncurses-term, for color tmux
 
 kak-lsp, for lsp

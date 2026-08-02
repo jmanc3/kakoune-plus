@@ -8,19 +8,19 @@ evaluate-commands %sh{
     find -L "$HOME/.config/kak/plugins/fzf.kak/rc/modules/" -type f -name '*.kak' -exec printf 'source "%s"\n' {} \;
 }
 
-source %sh{ echo "$HOME/.config/kak/plugins/kakboard/kakboard.kak" }
+#source %sh{ echo "$HOME/.config/kak/plugins/kakboard/kakboard.kak" }
 
 hook global WinCreate .* %{
     kakboard-enable
+    set-option global fzf_file_command 'rg' # 'ag', 'fd', or 'find
 }
 
-
-map global normal <c-o> ': fzf-mode<ret>'
 
 # addhl global/ wrap
 
 #colorscheme gruvbox-dark
-colorscheme colibri
+#colorscheme colibri
+colorscheme charcoal
 
 # set tab width, set indent with sapces
 set-option global tabstop 4
@@ -138,7 +138,7 @@ hook global InsertChar k %{ try %{
   exec <esc>
 }}
 
-map global normal <c-o> ': fzf-mode<ret>'
+map global normal <c-a-o> ': fzf-mode<ret>'
 
 map global user l ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
 
@@ -151,3 +151,5 @@ map global object t '<a-semicolon>lsp-object Class Interface Struct<ret>' -docst
 map global object d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>' -docstring 'LSP errors and warnings'
 map global object D '<a-semicolon>lsp-diagnostic-object<ret>' -docstring 'LSP errors'
 
+map global goto d ':lsp-definition<ret>' -docstring 'definition'
+map global goto m ': clangd-switch-source-header<ret>' -docstring 'switch .cpp/h'

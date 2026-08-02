@@ -1,7 +1,7 @@
 [general]
 import = [
     #"~/.config/alacritty/themes/themes/flexoki.toml.toml"
-    "~/.config/alacritty/themes/themes/colibri.toml"
+    #"~/.config/alacritty/themes/themes/colibri.toml"
 ]
 
 [window]
@@ -12,10 +12,13 @@ columns = 140
 lines = 36
 
 [font]
-normal = { family = "Cascadia Mono", style = "Regular" }
+normal = { family = "Jetbrains Mono", style = "Regular" }
 size = 13
 
 
-
-
+[keyboard]
+bindings = [
+  { key = "F1", chars = "make release load\n" },
+  { key = "F2", chars = "make load\n" },
+]
 
