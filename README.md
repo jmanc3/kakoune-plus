@@ -10,6 +10,8 @@ tmux, for split panes functionality
 
 tinty, for theme colors across alacritty tmux and kak
 
+also https://github.com/tinted-theming/tinted-terminal for alacritty terminal instructions
+
 ncurses-term, for color tmux
 
 kak-lsp, for lsp
@@ -73,17 +75,23 @@ cp -r alacritty ~/.config/
 And then add this to your `~/.bashrc`
 
 ```bash
-function kakoune() {
-    local session_name="kak-tmux-$(date +%s%N)"
-    tmux new-session -s "$session_name" bash -c "kak \"$@\""
+kakoune() {
+    if [[ -n "$TMUX" ]]; then
+        command kak "$@"
+    else
+        local session_name="kak-$(date +%s%N)"
+        tmux new-session -s "$session_name" "kak \"$@\""
+    fi
 }
+
 alias kak='kakoune'
 
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color=fg:#a4a0e8,bg:#3b224c,hl:#dbbfef
-  --color=fg+:#ffffff,bg+:#452859,hl+:#a4a0e8
-  --color=info:#E8DCA0,prompt:#EFBA5D,pointer:#9FF28F
-  --color=marker:#EFBA5D,spinner:#dbbfef,header:#697C81'
+# deprecated use tinty
+#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  #--color=fg:#a4a0e8,bg:#3b224c,hl:#dbbfef
+  #--color=fg+:#ffffff,bg+:#452859,hl+:#a4a0e8
+  #--color=info:#E8DCA0,prompt:#EFBA5D,pointer:#9FF28F
+  #--color=marker:#EFBA5D,spinner:#dbbfef,header:#697C81'
 ```
 
 So that when you run `kak`, it'll start it inside a tmux session, so that split pane functionality is available. (The tmux session ends when the kak session ends)
