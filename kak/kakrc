@@ -10,6 +10,7 @@ evaluate-commands %sh{
     find -L "$HOME/.config/kak/plugins/fzf.kak/rc/modules/" -type f -name '*.kak' -exec printf 'source "%s"\n' {} \;
 }
 
+# provide-module
 hook global ModuleLoaded fzf-file %{
     set-option global fzf_file_command 'rg'
 }
@@ -20,7 +21,7 @@ hook global ModuleLoaded fzf-grep %{
 
 source %sh{ echo "$HOME/.config/kak/plugins/kakboard/kakboard.kak" }
 
-hook global ModuleLoaded kakboard %{
+hook global WinCreate .* %{
     kakboard-enable
 }
 
