@@ -1,6 +1,8 @@
 eval %sh{kak-lsp}
 lsp-enable
 
+set-option global modelinefmt "%opt{lsp_modeline} %opt{modelinefmt}"
+
 source %sh{ echo "$HOME/.config/kak/plugins/fzf.kak/rc/fzf.kak" }
 
 #source "/home/jmanc3/.config/kak/plugins/fzf.kak/rc/fzf.kak" # loading base fzf module
@@ -8,13 +10,19 @@ evaluate-commands %sh{
     find -L "$HOME/.config/kak/plugins/fzf.kak/rc/modules/" -type f -name '*.kak' -exec printf 'source "%s"\n' {} \;
 }
 
-#source %sh{ echo "$HOME/.config/kak/plugins/kakboard/kakboard.kak" }
-
-hook global WinCreate .* %{
-    kakboard-enable
-    set-option global fzf_file_command 'rg' # 'ag', 'fd', or 'find
+hook global ModuleLoaded fzf-file %{
+    set-option global fzf_file_command 'rg'
 }
 
+hook global ModuleLoaded fzf-grep %{
+    set-option global fzf_grep_command 'rg'
+}
+
+source %sh{ echo "$HOME/.config/kak/plugins/kakboard/kakboard.kak" }
+
+hook global ModuleLoaded kakboard %{
+    kakboard-enable
+}
 
 # addhl global/ wrap
 
